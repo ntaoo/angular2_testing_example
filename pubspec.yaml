@@ -1,0 +1,26 @@
+name: angular2_testing_example
+description: A Dart app that uses Angular 2
+version: 0.0.1
+environment:
+  sdk: '>=1.13.0 <2.0.0'
+dependencies:
+  angular2: 2.0.0-beta.17
+  browser: ^0.10.0
+  dart_to_js_script_rewriter: ^1.0.1
+
+dev_dependencies:
+  test: '>=0.12.0 <0.13.0'
+  angular2_testing: any
+  # Needs quiver. Without this, raises error "Failed to load "test/app_component_test.dart": Failed to load script at http://localhost:8081/app_component_test.dart.browser_test.dart." on running the test.
+  quiver: '^0.21.4'
+
+transformers:
+- angular2:
+    platform_directives:
+    - 'package:angular2/common.dart#COMMON_DIRECTIVES'
+    platform_pipes:
+    - 'package:angular2/common.dart#COMMON_PIPES'
+    entry_points: web/main.dart
+- test/pub_serve:
+    $include: test/**_test{.*,}.dart
+- dart_to_js_script_rewriter
